@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <span class="badge bg-white bg-opacity-25 text-white mb-3 px-3 py-2 rounded-pill fw-bold border border-white border-opacity-25 shadow-sm">v2.0 is Live &bull; Built for 2026</span>
+        <h1 class="display-3 fw-bold mb-4 text-white">Revolutionize Logistics with<br><span class="gradient-text">CargoERP</span></h1>
+        <p class="lead text-light mb-5 mx-auto" style="max-width: 650px; opacity: 0.9;">
+            The next-generation SaaS platform for maritime and cargo management. Track fleets, predict maintenance with AI, and optimize your global supply chain in real-time.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg px-5 rounded-pill shadow-sm">Get Started Free</a>
+            <a href="#features" class="btn btn-outline-light btn-lg px-5 rounded-pill bg-white bg-opacity-10 border-white border-opacity-25">Discover Features</a>
+        </div>
+    </div>
+</section>
+
+<!-- Social Proof Banner -->
+<section class="py-4 border-bottom bg-white text-center shadow-sm position-relative" style="z-index: 10;">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 gap-md-5 opacity-50">
+            <h5 class="mb-0 fw-bold text-muted">OCEANIC FREIGHT</h5>
+            <h5 class="mb-0 fw-bold text-muted">STELLA MARINE</h5>
+            <h5 class="mb-0 fw-bold text-muted">GLOBAL LOGISTICS</h5>
+            <h5 class="mb-0 fw-bold text-muted">TECHFREIGHT</h5>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="saas-section bg-light">
+    <div class="container">
+        <div class="text-center mb-5 pb-3">
+            <h2 class="fw-bold">Everything you need, <span class="gradient-text">supercharged</span>.</h2>
+            <p class="text-muted">Powerful modules designed specifically for modern shipping operations.</p>
+        </div>
+        
+        <!-- 2026 SaaS Bento Box Grid -->
+        <div class="bento-grid">
+            <!-- Large Item -->
+            <div class="feature-card bento-item-large bg-dark text-white border-0 position-relative overflow-hidden">
+                <div class="position-relative z-1">
+                    <div class="icon-box"><i class="fas fa-satellite-dish"></i></div>
+                    <h3 class="fw-bold mb-3">Live Fleet Tracking</h3>
+                    <p class="text-light opacity-75 fs-5 w-75">Monitor global coordinates, ETA, and cargo load status of every single ship in your fleet instantly. No refresh required.</p>
+                </div>
+                <!-- Decorative Background Glow -->
+                <div class="position-absolute rounded-circle" style="background: radial-gradient(circle, rgba(79, 70, 229, 0.4) 0%, transparent 70%); width: 400px; height: 400px; bottom: -150px; right: -100px; z-index: 0;"></div>
+            </div>
+            <!-- Standard Items -->
+            <div class="feature-card">
+                <div class="icon-box"><i class="fas fa-brain"></i></div>
+                <h4 class="fw-bold">NLP Intelligence</h4>
+                <p class="text-muted">Natural Language Processing instantly categorizes crew complaints by urgency and sentiment, saving hours of manual review.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                <h4 class="fw-bold">AI Financial Insights</h4>
+                <p class="text-muted">Smart algorithms automatically detect anomalous spending and dynamically assess client invoice payment risks.</p>
+            </div>
+            <div class="feature-card bento-item-large">
+                <div class="icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h4 class="fw-bold">Automated Billing & Routing</h4>
+                <p class="text-muted">Generate professional invoices, track partial payments, and optimize maritime routes to save millions in fuel costs annually.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits -->
+<section class="saas-section border-top">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="text-primary fw-bold text-uppercase tracking-wide mb-2 d-block">Seamless Integration</span>
+                <h2 class="display-5 fw-bold mb-4">Streamline operations from <span class="gradient-text">port to port</span>.</h2>
+                <p class="lead text-muted mb-4">No more scattered spreadsheets. CargoERP centralizes your crew schedules, client portals, and complaint tracking into one intuitive dashboard.</p>
+                
+                <div class="d-flex align-items-start mb-4">
+                    <div class="text-primary mt-1 me-3 fs-4"><i class="fas fa-check-circle"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-1">NLP Complaint Routing</h5>
+                        <p class="text-muted mb-0">Prioritize issues before they become disasters.</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-start mb-4">
+                    <div class="text-primary mt-1 me-3 fs-4"><i class="fas fa-check-circle"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-1">Role-based Crew App</h5>
+                        <p class="text-muted mb-0">Dedicated portals for Admins, Captains, and Crew.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <!-- High Quality Unsplash Placeholder Image -->
+                <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80&w=800" alt="Container Ship" class="img-fluid rounded-4 shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- New Rich Testimonials -->
+<section id="testimonials" class="marquee-wrapper border-top border-dark">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-white mb-3">Loved by Logistics Leaders</h2>
+        <p class="text-light opacity-75">Don't just take our word for it. See what top fleets are saying.</p>
+    </div>
+    <div class="marquee-content">
+        <!-- Card 1 -->
+        <div class="testimonial-card">
+            <div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="fs-5 text-light opacity-90 mb-4 lh-base">"CargoERP is an absolute game-changer. The AI financial forecaster alone saved us 15% in operational costs this quarter."</p>
+            <div class="d-flex align-items-center mt-auto">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold me-3 fs-5" style="width:48px; height:48px;">SJ</div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold fs-6">Sarah Jenkins</h6>
+                    <small class="text-light opacity-50">CTO, Stella Marine</small>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="testimonial-card">
+            <div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="fs-5 text-light opacity-90 mb-4 lh-base">"The sleekest UI I've ever seen in the maritime space. Our crew actually enjoys logging their maintenance reports now."</p>
+            <div class="d-flex align-items-center mt-auto">
+                <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold me-3 fs-5" style="width:48px; height:48px;">MR</div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold fs-6">Marcus Reed</h6>
+                    <small class="text-light opacity-50">Fleet Manager, TechFreight</small>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="testimonial-card">
+            <div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="fs-5 text-light opacity-90 mb-4 lh-base">"Customer complaints are resolved 5x faster thanks to the NLP urgency routing. It instantly flags critical ship issues."</p>
+            <div class="d-flex align-items-center mt-auto">
+                <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center fw-bold me-3 fs-5" style="width:48px; height:48px;">EL</div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold fs-6">Elena Lin</h6>
+                    <small class="text-light opacity-50">Operations Dir., OceanWays</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Duplicate for infinite seamless loop -->
+        <div class="testimonial-card">
+            <div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="fs-5 text-light opacity-90 mb-4 lh-base">"CargoERP is an absolute game-changer. The AI financial forecaster alone saved us 15% in operational costs this quarter."</p>
+            <div class="d-flex align-items-center mt-auto">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold me-3 fs-5" style="width:48px; height:48px;">SJ</div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold fs-6">Sarah Jenkins</h6>
+                    <small class="text-light opacity-50">CTO, Stella Marine</small>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="fs-5 text-light opacity-90 mb-4 lh-base">"The sleekest UI I've ever seen in the maritime space. Our crew actually enjoys logging their maintenance reports now."</p>
+            <div class="d-flex align-items-center mt-auto">
+                <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold me-3 fs-5" style="width:48px; height:48px;">MR</div>
+                <div>
+                    <h6 class="mb-0 text-white fw-bold fs-6">Marcus Reed</h6>
+                    <small class="text-light opacity-50">Fleet Manager, TechFreight</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="saas-section bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Transparent Pricing</h2>
+            <p class="text-muted">Scale your operations without hidden fees.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <!-- Basic Tier -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card">
+                    <h4 class="fw-bold">Starter</h4>
+                    <h2 class="display-4 fw-bold my-3">$299<span class="fs-6 text-muted fw-normal">/mo</span></h2>
+                    <p class="text-muted mb-4">Perfect for small fleets just getting started.</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Up to 5 Ships</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Basic Tracking</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Expense Reports</li>
+                    </ul>
+                    <a href="{{ url_for('signup') }}" class="btn btn-outline-primary w-100 rounded-pill mt-auto py-2">Choose Starter</a>
+                </div>
+            </div>
+            <!-- Pro Tier -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card popular shadow-lg">
+                    <div class="badge-popular">MOST POPULAR</div>
+                    <h4 class="fw-bold">Enterprise</h4>
+                    <h2 class="display-4 fw-bold my-3">$899<span class="fs-6 text-muted fw-normal">/mo</span></h2>
+                    <p class="text-muted mb-4">Full AI capabilities for growing shipping lines.</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Unlimited Ships</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Predictive Maintenance AI</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Route Optimization</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Client Portal Access</li>
+                    </ul>
+                    <a href="{{ url_for('signup') }}" class="btn btn-primary w-100 rounded-pill mt-auto py-2">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

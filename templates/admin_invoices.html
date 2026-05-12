@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+        <h2>Invoices & Billing</h2>
+        <a href="{{ url_for('add_invoice') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create Invoice</a>
+    </div>
+
+    <ul class="nav nav-tabs mb-4" id="invoiceTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold" data-bs-toggle="tab" data-bs-target="#due" type="button" role="tab">Due Invoices</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold text-success" data-bs-toggle="tab" data-bs-target="#paid" type="button" role="tab">Fully Paid</button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="due" role="tabpanel">
+            <div class="card shadow-sm"><div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr><th>Client</th><th>Phone</th><th>Total Amount</th><th>Due Amount</th><th>Payment Risk (AI)</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for inv in invoices if inv.status == 'Due' %}
+                        <tr>
+                            <td><strong>{{ inv.client_name }}</strong></td>
+                            <td>{{ inv.client_phone }}</td>
+                            <td>${{ "{:,.2f}".format(inv.total_amount) }}</td>
+                            <td class="text-danger fw-bold">${{ "{:,.2f}".format(inv.due_amount) }}</td>
+                            <td>
+                                {% if inv.ai_risk == 'High Risk' %}
+                                    <span class="badge bg-danger"><i class="fas fa-chart-pie me-1"></i> High</span>
+                                {% elif inv.ai_risk == 'Medium Risk' %}
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-chart-pie me-1"></i> Medium</span>
+                                {% else %}
+                                    <span class="badge bg-success"><i class="fas fa-chart-pie me-1"></i> Low</span>
+                                {% endif %}
+                            </td>
+                            <td><a href="{{ url_for('view_invoice', invoice_id=inv._id) }}" class="btn btn-sm btn-outline-primary">Manage</a></td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="6" class="text-center text-muted py-3">No pending invoices.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div></div>
+        </div>
+        <div class="tab-pane fade" id="paid" role="tabpanel">
+            <div class="card shadow-sm"><div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr><th>Client</th><th>Phone</th><th>Total Amount</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for inv in invoices if inv.status == 'Paid' %}
+                        <tr>
+                            <td><strong>{{ inv.client_name }}</strong></td>
+                            <td>{{ inv.client_phone }}</td>
+                            <td>${{ "{:,.2f}".format(inv.total_amount) }}</td>
+                            <td><span class="badge bg-success">Paid</span></td>
+                            <td><a href="{{ url_for('view_invoice', invoice_id=inv._id) }}" class="btn btn-sm btn-outline-secondary">View</a></td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="5" class="text-center text-muted py-3">No paid invoices yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

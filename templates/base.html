@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CargoERP</title>
+    <!-- Using Bootstrap for quick styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if session.get('user') %}
+    <!-- =============================================== -->
+    <!-- ==  LOGGED-IN (INTERNAL APP) NAVIGATION  == -->
+    <!-- =============================================== -->
+    <!-- This nav is a sidebar on desktop and a bottom bar on mobile -->
+    <nav class="sidebar">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-ship"></i> <span>CargoERP</span>
+        </a>
+
+        {% if session['user']['role'] == 'admin' %}
+            <a href="{{ url_for('admin_dashboard') }}" class="nav-link active"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="{{ url_for('admin_users') }}" class="nav-link"><i class="fas fa-users"></i><span>Users</span></a>
+            <a href="{{ url_for('admin_ships') }}" class="nav-link"><i class="fas fa-anchor"></i><span>Ships</span></a>
+            <a href="{{ url_for('admin_expenditure') }}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Expenditure</span></a>
+            <a href="{{ url_for('admin_invoices') }}" class="nav-link"><i class="fas fa-file-invoice"></i><span>Invoices</span></a>
+            <a href="{{ url_for('admin_notices') }}" class="nav-link"><i class="fas fa-bullhorn"></i><span>Notices</span></a>
+            <a href="{{ url_for('admin_complaints') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Complaints</span></a>
+        {% else %}
+            <a href="{{ url_for('user_dashboard') }}" class="nav-link active"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="{{ url_for('user_complaints') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Complaints</span></a>
+        {% endif %}
+
+        <a href="{{ url_for('logout') }}" class="nav-link mt-auto"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </nav>
+    {% else %}
+    <!-- =============================================== -->
+    <!-- ==   PUBLIC-FACING (LOGGED-OUT) NAVIGATION   == -->
+    <!-- =============================================== -->
+    <nav class="navbar public-nav navbar-expand-lg navbar-dark fixed-top" id="publicNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="fas fa-ship"></i> CargoERP
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#publicNavbar" aria-controls="publicNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="publicNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#testimonials">Testimonials</a></li>
+                </ul>
+                <div class="d-flex flex-column flex-lg-row align-items-center">
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-light me-lg-2 w-100 w-lg-auto mb-2 mb-lg-0">Login</a>
+                    <a href="{{ url_for('signup') }}" class="btn btn-primary w-100 w-lg-auto">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <!-- Floating Notifications Container -->
+    <div class="custom-toast-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="custom-toast alert-{{ category }}">
+                        <div class="custom-toast-message">{{ message }}</div>
+                        <button type="button" class="custom-toast-close" onclick="closeToast(this)" aria-label="Close"><i class="fas fa-times"></i></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <main class="{% if session.get('user') %}main-content{% endif %}">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if not session.get('user') %}
+    <footer class="public-footer">
+        <!-- Footer content can be expanded here -->
+        <div class="container text-center">
+            <p>&copy; 2024 CargoERP. All Rights Reserved.</p>
+            <p>Revolutionizing Maritime Logistics.</p>
+        </div>
+    </footer>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Global Scripts -->
+    <script>
+        // Function to manually close the animated toast
+        function closeToast(button) {
+            const toast = button.closest('.custom-toast');
+            toast.classList.add('hide-toast');
+            setTimeout(() => toast.remove(), 400); // Wait for slideOutRight animation to finish
+        }
+
+        // Auto-dismiss toasts after 5 seconds
+        document.addEventListener('DOMContentLoaded', () => {
+            const toasts = document.querySelectorAll('.custom-toast');
+            toasts.forEach(toast => {
+                setTimeout(() => {
+                    if (toast.parentElement) {
+                        closeToast(toast.querySelector('.custom-toast-close'));
+                    }
+                }, 5000);
+            });
+        });
+    </script>
+    {% if not session.get('user') %}
+    <script>
+        // Public Nav Scroll Effect
+        const nav = document.getElementById('publicNav');
+        if (nav) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        }
+    </script>
+    {% endif %}
+</body>
+</html>

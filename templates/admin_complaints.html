@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">User Complaints & Reports</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Reported By</th>
+                        <th style="width: 30%">Complaint Description</th>
+                        <th>AI Analysis (NLP)</th>
+                        <th>Current Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in complaints %}
+                    <tr>
+                        <td><small class="text-muted">{{ c.date }}</small></td>
+                        <td>{{ c.user_name }}<br><small class="text-muted">{{ c.user_email }}</small></td>
+                        <td>{{ c.description }}</td>
+                        <td>
+                            {% if c.urgency %}
+                                <span class="badge {% if c.urgency == 'Critical' %}bg-danger{% elif c.urgency == 'High' %}bg-warning text-dark{% else %}bg-info text-dark{% endif %} mb-1"><i class="fas fa-robot"></i> {{ c.urgency }} Urgency</span><br>
+                                <small class="text-muted">Sentiment: {{ c.sentiment }}</small>
+                            {% else %}
+                                <span class="badge bg-secondary">Not Analyzed</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if c.status == 'pending' %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif c.status == 'action taken' %}
+                                <span class="badge bg-success">Action Taken</span>
+                            {% elif c.status == 'aborted' %}
+                                <span class="badge bg-danger">Aborted</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="POST" action="{{ url_for('admin_complaints') }}" class="d-flex">
+                                <input type="hidden" name="complaint_id" value="{{ c._id }}">
+                                <select name="status" class="form-select form-select-sm me-2" required>
+                                    <option value="" disabled selected>Update...</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="action taken">Action Taken</option>
+                                    <option value="aborted">Aborted</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="5" class="text-center py-4 text-muted">No complaints logged yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>{% endblock %}

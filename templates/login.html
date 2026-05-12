@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Welcome Back</h2>
+            <p class="text-muted">Sign in to manage your maritime operations</p>
+        </div>
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="mb-3">
+                <label for="email" class="form-label fw-medium">Email Address</label>
+                <input type="email" class="form-control form-control-lg bg-light" id="email" name="email" placeholder="name@company.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label fw-medium">User Type</label>
+                <select class="form-select form-control-lg bg-light" id="role" name="role" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="admin">Administrator</option>
+                    <option value="user">Regular User / Crew</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label fw-medium">Password</label>
+                <input type="password" class="form-control form-control-lg bg-light" id="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">Login to Dashboard</button>
+        </form>
+        <div class="text-center mt-3">
+            <p class="text-muted">Don't have an account? <a href="{{ url_for('signup') }}" class="fw-bold text-primary text-decoration-none">Sign Up</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

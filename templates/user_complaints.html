@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">My Complaints & Reports</h2>
+    
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">File a New Complaint</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('user_complaints') }}">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description of the Issue</label>
+                            <textarea name="description" class="form-control" rows="5" required placeholder="Please describe the issue in detail..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane me-2"></i> Submit Complaint</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Complaint History</h5>
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr><th>Date Submitted</th><th>Description</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for c in complaints %}
+                            <tr>
+                                <td><small class="text-muted">{{ c.date }}</small></td>
+                                <td>{{ c.description }}</td>
+                                <td>
+                                    {% if c.status == 'pending' %}
+                                        <span class="badge bg-warning text-dark"><i class="fas fa-clock me-1"></i> Pending</span>
+                                    {% elif c.status == 'action taken' %}
+                                        <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i> Action Taken</span>
+                                    {% elif c.status == 'aborted' %}
+                                        <span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i> Aborted</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="3" class="text-center py-4 text-muted">You have not submitted any complaints.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
